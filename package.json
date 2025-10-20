@@ -6,23 +6,26 @@
   "packageManager": "yarn@4.10.3",
   "type": "module",
   "scripts": {
-    "start": "expo start",
+    "start": "dotenv -e .env.production expo start",
+    "start:dev": "dotenv -e .env.local expo start",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
     "supabase": "supabase start",
-    "supabase:stop": "supabase stop",
-    "supabase:reset": "supabase db reset",
-    "supabase:migration:new": "supabase migration new",
-    "supabase:migration:up": "supabase db push",
-    "supabase:link": "supabase link",
-    "supabase:pull": "supabase db pull",
-    "dev": "concurrently -n supabase,expo -c blue,green \"yarn supabase\" \"yarn start\""
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:migration:new": "supabase migration new",
+    "db:migration:up": "supabase db push",
+    "db:link": "supabase link",
+    "db:pull": "supabase db pull",
+    "db:studio": "open http://127.0.0.1:54323",
+    "dev": "concurrently -n supabase,expo -c blue,green \"yarn supabase\" \"yarn start:dev\""
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",
+    "@hookform/resolvers": "^5.2.2",
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-navigation/bottom-tabs": "^7.4.0",
     "@react-navigation/elements": "^2.6.3",
@@ -49,6 +52,7 @@
     "nativewind": "^4.2.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hook-form": "^7.65.0",
     "react-native": "0.81.4",
     "react-native-gesture-handler": "~2.28.0",
     "react-native-reanimated": "~3.17.4",
@@ -58,7 +62,8 @@
     "react-native-web": "~0.21.0",
     "react-native-worklets": "0.5.1",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^3.4.18"
+    "tailwindcss": "^3.4.18",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
@@ -71,6 +76,7 @@
     "commitizen": "^4.3.1",
     "commitlint": "^20.1.0",
     "concurrently": "^9.2.1",
+    "dotenv-cli": "^10.0.0",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
     "eslint-plugin-import": "^2.32.0",
@@ -78,7 +84,6 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react-hooks": "^7.0.0",
     "jsonc-eslint-parser": "^2.4.1",
-    "react-native-dotenv": "^3.4.11",
     "typescript": "~5.9.2"
   },
   "husky": {

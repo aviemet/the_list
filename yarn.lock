@@ -1899,6 +1899,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hookform/resolvers@npm:^5.2.2":
+  version: 5.2.2
+  resolution: "@hookform/resolvers@npm:5.2.2"
+  dependencies:
+    "@standard-schema/utils": "npm:^0.3.0"
+  peerDependencies:
+    react-hook-form: ^7.55.0
+  checksum: 10c0/0692cd61dcc2a70cbb27b88a37f733c39e97f555c036ba04a81bd42b0467461cfb6bafacb46c16f173672f9c8a216bd7928a2330d4e49c700d130622bf1defaf
+  languageName: node
+  linkType: hard
+
 "@humanfs/core@npm:^0.19.1":
   version: 0.19.1
   resolution: "@humanfs/core@npm:0.19.1"
@@ -2906,6 +2917,13 @@ __metadata:
   dependencies:
     "@sinonjs/commons": "npm:^3.0.0"
   checksum: 10c0/2e2fb6cc57f227912814085b7b01fede050cd4746ea8d49a1e44d5a0e56a804663b0340ae2f11af7559ea9bf4d087a11f2f646197a660ea3cb04e19efc04aa63
+  languageName: node
+  linkType: hard
+
+"@standard-schema/utils@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@standard-schema/utils@npm:0.3.0"
+  checksum: 10c0/6eb74cd13e52d5fc74054df51e37d947ef53f3ab9e02c085665dcca3c38c60ece8d735cebbdf18fbb13c775fbcb9becb3f53109b0e092a63f0f7389ce0993fd0
   languageName: node
   linkType: hard
 
@@ -5185,7 +5203,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv-expand@npm:~11.0.6":
+"dotenv-cli@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "dotenv-cli@npm:10.0.0"
+  dependencies:
+    cross-spawn: "npm:^7.0.6"
+    dotenv: "npm:^17.1.0"
+    dotenv-expand: "npm:^11.0.0"
+    minimist: "npm:^1.2.6"
+  bin:
+    dotenv: cli.js
+  checksum: 10c0/c469e65167fc3d1ef7bc6f90c8b7a0accd245ad1cdb73da8c72b32ddb308550dc4d5bfcdae964ab1f8a247957d756afc7b050d0f88fa5868c05ff6d3dfb4c1ba
+  languageName: node
+  linkType: hard
+
+"dotenv-expand@npm:^11.0.0, dotenv-expand@npm:~11.0.6":
   version: 11.0.7
   resolution: "dotenv-expand@npm:11.0.7"
   dependencies:
@@ -5201,7 +5233,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^17.2.3":
+"dotenv@npm:^17.1.0, dotenv@npm:^17.2.3":
   version: 17.2.3
   resolution: "dotenv@npm:17.2.3"
   checksum: 10c0/c884403209f713214a1b64d4d1defa4934c2aa5b0002f5a670ae298a51e3c3ad3ba79dfee2f8df49f01ae74290fcd9acdb1ab1d09c7bfb42b539036108bb2ba0
@@ -10111,6 +10143,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-hook-form@npm:^7.65.0":
+  version: 7.65.0
+  resolution: "react-hook-form@npm:7.65.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18 || ^19
+  checksum: 10c0/119afeaf33510d1ed6c12109f03d22d9e88f9eb01b8e4fb3cd8f40d5fc113cbcfc6154789d1d143151de8119bd08ffc7214d504e0e550ea28a9051ed6a30ae28
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -10153,17 +10194,6 @@ __metadata:
     react-native-svg:
       optional: true
   checksum: 10c0/c3be3a785216ce430d32a78f52c76387b4fc38b53b9d66d4cf5e3973f1fe35c801f8f299e6b8c129be9c979ccd3274a35dccf4f8054f46cca3288a3ca77c7a4c
-  languageName: node
-  linkType: hard
-
-"react-native-dotenv@npm:^3.4.11":
-  version: 3.4.11
-  resolution: "react-native-dotenv@npm:3.4.11"
-  dependencies:
-    dotenv: "npm:^16.4.5"
-  peerDependencies:
-    "@babel/runtime": ^7.20.6
-  checksum: 10c0/9ed4a37fb59030706d17a1cc49d05af9d8fc57dcb2ef97e122b844f3ab6f6331ebc089afac559fe5bddf37806aa282b4118005f1b27aae5e37fdc3fc8bd7625c
   languageName: node
   linkType: hard
 
@@ -11634,6 +11664,7 @@ __metadata:
     "@commitlint/config-conventional": "npm:^20.0.0"
     "@eslint/json": "npm:^0.13.2"
     "@expo/vector-icons": "npm:^15.0.2"
+    "@hookform/resolvers": "npm:^5.2.2"
     "@react-native-async-storage/async-storage": "npm:2.2.0"
     "@react-navigation/bottom-tabs": "npm:^7.4.0"
     "@react-navigation/elements": "npm:^2.6.3"
@@ -11651,6 +11682,7 @@ __metadata:
     commitlint: "npm:^20.1.0"
     concurrently: "npm:^9.2.1"
     dotenv: "npm:^17.2.3"
+    dotenv-cli: "npm:^10.0.0"
     eslint: "npm:^9.25.0"
     eslint-config-expo: "npm:~10.0.0"
     eslint-plugin-import: "npm:^2.32.0"
@@ -11674,8 +11706,8 @@ __metadata:
     nativewind: "npm:^4.2.1"
     react: "npm:19.1.0"
     react-dom: "npm:19.1.0"
+    react-hook-form: "npm:^7.65.0"
     react-native: "npm:0.81.4"
-    react-native-dotenv: "npm:^3.4.11"
     react-native-gesture-handler: "npm:~2.28.0"
     react-native-reanimated: "npm:~3.17.4"
     react-native-safe-area-context: "npm:^5.4.0"
@@ -11686,6 +11718,7 @@ __metadata:
     tailwind-merge: "npm:^3.3.1"
     tailwindcss: "npm:^3.4.18"
     typescript: "npm:~5.9.2"
+    zod: "npm:^4.1.12"
   languageName: unknown
   linkType: soft
 
@@ -12611,7 +12644,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.22.4 || ^4.0.0":
+"zod@npm:^3.22.4 || ^4.0.0, zod@npm:^4.1.12":
   version: 4.1.12
   resolution: "zod@npm:4.1.12"
   checksum: 10c0/b64c1feb19e99d77075261eaf613e0b2be4dfcd3551eff65ad8b4f2a079b61e379854d066f7d447491fcf193f45babd8095551a9d47973d30b46b6d8e2c46774

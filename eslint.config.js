@@ -169,9 +169,8 @@ export default defineConfig([
 				},
 				"newlines-between": "always",
 			}],
-			"no-empty-object-type": "off",
+			"@typescript-eslint/no-empty-object-type": "off",
 
-			// "import/no-default-export": "error",
 			"import/newline-after-import": "error",
 			"import/consistent-type-specifier-style": ["error", "prefer-inline"],
 			"import/no-named-as-default": "off",

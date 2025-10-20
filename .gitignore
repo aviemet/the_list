@@ -35,7 +35,7 @@ yarn-error.*
 .env
 .env.local
 .env.production
-supabase/supabase.env
+supabase.env
 
 # supabase - track migrations but ignore local state
 supabase/.branches/
