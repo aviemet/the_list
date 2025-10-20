@@ -32,6 +32,15 @@ yarn-error.*
 
 # local env files
 .env*.local
+.env
+.env.local
+.env.production
+supabase/supabase.env
+
+# supabase - track migrations but ignore local state
+supabase/.branches/
+supabase/.temp/
+supabase/logs/
 
 # typescript
 *.tsbuildinfo

@@ -13,14 +13,15 @@ const ignores = [
 	"dist/*",
 	".vscode/**/*",
 	".yarn/**/*",
+	"**/*.md",
 ]
 
 export default defineConfig([
 	expoConfig,
-	importPlugin.flatConfigs.recommended,
-	importPlugin.flatConfigs.typescript,
 	// Typescript/Javascript files
 	{
+		...importPlugin.flatConfigs.recommended,
+		...importPlugin.flatConfigs.typescript,
 		...stylistic.configs.customize({
 			indent: "tab",
 		}),
@@ -168,6 +169,7 @@ export default defineConfig([
 				},
 				"newlines-between": "always",
 			}],
+			"no-empty-object-type": "off",
 
 			// "import/no-default-export": "error",
 			"import/newline-after-import": "error",
