@@ -1,50 +1,70 @@
-# Welcome to your Expo app 👋
+# The List
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform mobile application for creating, managing, and sharing lists of media recommendations and interests.
 
-## Get started
+## Overview
 
-1. Install dependencies
+The List helps you track movies, TV shows, books, comics, songs, and albums you want to watch, read, or listen to. Create curated lists, share them with friends, and discover where to find each item across streaming and retail platforms.
+
+## Features
+
+- **Multi-media Support**: Create lists for movies, TV shows, books, comics, songs, and albums
+- **List Sharing**: Share your curated lists with friends and family
+- **Direct Links**: Items link directly to platforms where they can be accessed
+- **Cross-platform**: Works on iOS, Android, and web
+
+## Tech Stack
+
+- **Frontend**: React Native with Expo
+- **Backend**: Supabase PostgreSQL
+- **Styling**: NativeWind (Tailwind CSS for React Native)
+- **State Management**: TanStack Query (React Query)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- Yarn
+- Expo CLI
+
+### Developer Installation
+
+1. Clone the repository
 
    ```bash
-   npm install
+   git clone <repository-url>
+   cd the_list
    ```
 
-2. Start the app
+2. Install dependencies
 
    ```bash
-   npx expo start
+   yarn install
    ```
 
-In the output, you'll find options to open the app in a
+3. Set up environment variables (see `.env.example`)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+4. Start the development server
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+   ```bash
+   yarn start
+   ```
 
-## Get a fresh project
+5. Run on your platform of choice
+   - Press `i` for iOS simulator
+   - Press `a` for Android emulator
+   - Scan QR code with Expo Go app for physical device
 
-When you're ready, run:
+## Database
 
-```bash
-npm run reset-project
-```
+This project uses Supabase for backend services. Database migrations are managed in the `supabase/migrations` directory. See `supabase/MIGRATIONS.md` for details on running and creating migrations.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Project Structure
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- `/app` - Main application screens using Expo Router file-based routing
+- `/components` - Reusable UI components
+- `/features` - Feature-specific components and logic
+- `/lib` - Shared utilities and configurations
+- `/queries` - React Query hooks for data fetching
+- `/supabase` - Database migrations and configuration
