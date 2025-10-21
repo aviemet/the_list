@@ -1,9 +1,9 @@
-import { router } from "expo-router"
-import { Alert } from "react-native"
+import { Redirect, router } from "expo-router"
+import { ActivityIndicator, Alert } from "react-native"
 import { z } from "zod"
 
 import { Form, FormSubmitButton, FormTextInput, Link, Text, View } from "@/components"
-import { useSignUp } from "@/features/auth"
+import { useAuth, useSignUp } from "@/features/auth"
 import { cn } from "@/lib"
 
 const signUpSchema = z.object({
@@ -18,6 +18,7 @@ const signUpSchema = z.object({
 type SignUpForm = z.infer<typeof signUpSchema>
 
 export default function SignUp() {
+	const { user, isLoading } = useAuth()
 	const signUp = useSignUp({})
 
 	const handleSubmit = (data: SignUpForm) => {
@@ -27,20 +28,27 @@ export default function SignUp() {
 				onSuccess: () => {
 					Alert.alert(
 						"Success",
-						"Account created! Please check your email to verify your account.",
-						[
-							{
-								text: "OK",
-								onPress: () => router.replace("/"),
-							},
-						]
+						"Account created! Please check your email to verify your account."
 					)
+					router.replace("/sign-in")
 				},
 				onError: (error) => {
 					Alert.alert("Error", error instanceof Error ? error.message : "An error occurred")
 				},
 			}
 		)
+	}
+
+	if(isLoading) {
+		return (
+			<View className={ cn("flex-1", "justify-center", "items-center", "bg-primary", "dark:bg-primary-dark") }>
+				<ActivityIndicator size="large" />
+			</View>
+		)
+	}
+
+	if(user) {
+		return <Redirect href="/" />
 	}
 
 	return (

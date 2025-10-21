@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"strict": true,
+		"lib": ["deno.window"],
+		"jsx": "react-jsx",
+		"jsxImportSource": "react"
+	},
+	"lint": {
+		"rules": {
+			"tags": ["recommended"]
+		}
+	},
+	"fmt": {
+		"useTabs": true,
+		"lineWidth": 120,
+		"indentWidth": 2,
+		"semiColons": false,
+		"singleQuote": false,
+		"proseWrap": "preserve"
+	}
+}
+

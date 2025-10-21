@@ -44,3 +44,4 @@ export type ReactMutationFunction<
  */
 
 export * from "./auth"
+export * from "./search"

@@ -21,6 +21,8 @@
     "db:link": "supabase link",
     "db:pull": "supabase db pull",
     "db:studio": "open http://127.0.0.1:54323",
+    "functions:serve": "supabase functions serve",
+    "functions:deploy": "supabase functions deploy",
     "dev": "concurrently -n supabase,expo -c blue,green \"yarn supabase\" \"yarn start:dev\""
   },
   "dependencies": {

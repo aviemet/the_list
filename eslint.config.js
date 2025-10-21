@@ -14,6 +14,7 @@ const ignores = [
 	".vscode/**/*",
 	".yarn/**/*",
 	"**/*.md",
+	"supabase/functions/**/*",
 ]
 
 export default defineConfig([

@@ -1,9 +1,9 @@
-import { router } from "expo-router"
-import { Alert } from "react-native"
+import { Redirect, router } from "expo-router"
+import { ActivityIndicator, Alert } from "react-native"
 import { z } from "zod"
 
 import { Form, FormSubmitButton, FormTextInput, Link, Text, View } from "@/components"
-import { useSignIn } from "@/features/auth"
+import { useAuth, useSignIn } from "@/features/auth"
 import { cn } from "@/lib"
 
 const signInSchema = z.object({
@@ -14,6 +14,7 @@ const signInSchema = z.object({
 type SignInForm = z.infer<typeof signInSchema>
 
 export default function SignIn() {
+	const { user, isLoading } = useAuth()
 	const signIn = useSignIn({})
 
 	const handleSubmit = (data: SignInForm) => {
@@ -28,6 +29,18 @@ export default function SignIn() {
 				},
 			}
 		)
+	}
+
+	if(isLoading) {
+		return (
+			<View className={ cn("flex-1", "justify-center", "items-center", "bg-primary", "dark:bg-primary-dark") }>
+				<ActivityIndicator size="large" />
+			</View>
+		)
+	}
+
+	if(user) {
+		return <Redirect href="/" />
 	}
 
 	return (
