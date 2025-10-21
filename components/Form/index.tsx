@@ -5,15 +5,23 @@ import { type z } from "zod"
 
 import { createContext } from "@/lib"
 
+import { FormField } from "./FormField"
+import { FormSubmitButton } from "./Inputs/SubmitButton"
+import { FormTextInput } from "./Inputs/TextInput"
+
 type FormContextValue = UseFormReturn & {
 	handleFormSubmit: () => void
 }
 
 const [useFormContext, FormProvider] = createContext<FormContextValue>()
-export { useFormContext }
+export { useFormContext, FormTextInput, FormField, FormSubmitButton }
+
+type FormRenderProps<TValues extends FieldValues> = UseFormReturn<TValues> & {
+	handleFormSubmit: () => void
+}
 
 interface FormProps<TValues extends FieldValues> {
-	children: React.ReactNode
+	children: ((props: FormRenderProps<TValues>) => React.ReactNode) | React.ReactNode
 	schema: z.ZodObject<z.ZodRawShape>
 	defaultValues?: DefaultValues<TValues>
 	onSubmit: SubmitHandler<TValues>
@@ -29,12 +37,12 @@ export function Form<TValues extends FieldValues>({
 	onError,
 	onSuccess,
 }: FormProps<TValues>) {
-	const form = useReactHookForm<TValues>({
+	const methods = useReactHookForm<TValues>({
 		resolver: zodResolver(schema) as Resolver<TValues>,
 		defaultValues,
 	})
 
-	const handleFormSubmit = form.handleSubmit(async(data: TValues) => {
+	const handleFormSubmit = methods.handleSubmit(async(data: TValues) => {
 		try {
 			await onSubmit(data)
 			onSuccess?.()
@@ -43,9 +51,11 @@ export function Form<TValues extends FieldValues>({
 		}
 	})
 
+	const contextValue = { ...methods, handleFormSubmit } as FormContextValue
+
 	return (
-		<FormProvider value={ { ...form, handleFormSubmit } as FormContextValue }>
-			{ children }
+		<FormProvider value={ contextValue }>
+			{ typeof children === "function" ? children(contextValue as FormRenderProps<TValues>) : children }
 		</FormProvider>
 	)
 }

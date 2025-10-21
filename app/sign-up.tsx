@@ -1,15 +1,13 @@
-import { zodResolver } from "@hookform/resolvers/zod"
 import { router } from "expo-router"
-import { Controller, useForm } from "react-hook-form"
 import { Alert } from "react-native"
 import { z } from "zod"
 
-import { Button, Link, Text, TextInput, View } from "@/components"
+import { Form, FormSubmitButton, FormTextInput, Link, Text, View } from "@/components"
 import { useSignUp } from "@/features/auth"
 import { cn } from "@/lib"
 
 const signUpSchema = z.object({
-	email: z.string().min(1, "Email is required").email("Invalid email address"),
+	email: z.email({ message: "Invalid email address" }).min(1, "Email is required"),
 	password: z.string().min(6, "Password must be at least 6 characters"),
 	confirmPassword: z.string().min(1, "Please confirm your password"),
 }).refine((data) => data.password === data.confirmPassword, {
@@ -21,16 +19,8 @@ type SignUpForm = z.infer<typeof signUpSchema>
 
 export default function SignUp() {
 	const signUp = useSignUp({})
-	const { control, handleSubmit, formState: { errors } } = useForm<SignUpForm>({
-		resolver: zodResolver(signUpSchema),
-		defaultValues: {
-			email: "",
-			password: "",
-			confirmPassword: "",
-		},
-	})
 
-	const onSubmit = (data: SignUpForm) => {
+	const handleSubmit = (data: SignUpForm) => {
 		signUp.mutate(
 			{ email: data.email, password: data.password },
 			{
@@ -41,7 +31,7 @@ export default function SignUp() {
 						[
 							{
 								text: "OK",
-								onPress: () => router.replace("/sign-in"),
+								onPress: () => router.replace("/"),
 							},
 						]
 					)
@@ -54,104 +44,64 @@ export default function SignUp() {
 	}
 
 	return (
-		<View className={ cn("flex-1", "justify-center", "px-6", "bg-primary", "dark:bg-primary-dark") }>
-			<Text className={ cn("text-3xl", "font-bold", "mb-8", "text-center") }>
-				Sign Up
-			</Text>
-
-			<View className={ cn("space-y-4") }>
-				<View>
-					<Text className={ cn("text-sm", "font-medium", "mb-2", "text-gray-700", "dark:text-gray-300") }>
-						Email
-					</Text>
-					<Controller
-						control={ control }
-						name="email"
-						render={ ({ field: { onChange, onBlur, value } }) => (
-							<TextInput
-								placeholder="your@email.com"
-								value={ value }
-								onChangeText={ onChange }
-								onBlur={ onBlur }
-								autoCapitalize="none"
-								keyboardType="email-address"
-								autoComplete="email"
-							/>
-						) }
-					/>
-					{ errors.email && (
-						<Text className={ cn("text-red-500", "text-sm", "mt-1") }>
-							{ errors.email.message }
-						</Text>
-					) }
-				</View>
-
-				<View className={ cn("mt-4") }>
-					<Text className={ cn("text-sm", "font-medium", "mb-2", "text-gray-700", "dark:text-gray-300") }>
-						Password
-					</Text>
-					<Controller
-						control={ control }
-						name="password"
-						render={ ({ field: { onChange, onBlur, value } }) => (
-							<TextInput
-								placeholder="••••••••"
-								value={ value }
-								onChangeText={ onChange }
-								onBlur={ onBlur }
-								secureTextEntry
-								autoComplete="password-new"
-							/>
-						) }
-					/>
-					{ errors.password && (
-						<Text className={ cn("text-red-500", "text-sm", "mt-1") }>
-							{ errors.password.message }
-						</Text>
-					) }
-				</View>
-
-				<View className={ cn("mt-4") }>
-					<Text className={ cn("text-sm", "font-medium", "mb-2", "text-gray-700", "dark:text-gray-300") }>
-						Confirm Password
-					</Text>
-					<Controller
-						control={ control }
-						name="confirmPassword"
-						render={ ({ field: { onChange, onBlur, value } }) => (
-							<TextInput
-								placeholder="••••••••"
-								value={ value }
-								onChangeText={ onChange }
-								onBlur={ onBlur }
-								secureTextEntry
-								autoComplete="password-new"
-							/>
-						) }
-					/>
-					{ errors.confirmPassword && (
-						<Text className={ cn("text-red-500", "text-sm", "mt-1") }>
-							{ errors.confirmPassword.message }
-						</Text>
-					) }
-				</View>
-
-				<Button
-					className={ cn("mt-6") }
-					onPress={ handleSubmit(onSubmit) }
-					isLoading={ signUp.isPending }
-				>
+		<Form
+			schema={ signUpSchema }
+			defaultValues={ {
+				email: "",
+				password: "",
+				confirmPassword: "",
+			} }
+			onSubmit={ handleSubmit }
+		>
+			<View className={ cn("flex-1", "justify-center", "px-6", "bg-primary", "dark:bg-primary-dark") }>
+				<Text className={ cn("text-3xl", "font-bold", "mb-8", "text-center") }>
 					Sign Up
-				</Button>
+				</Text>
 
-				<View className={ cn("flex-row", "justify-center", "mt-4") }>
-					<Text>Already have an account? </Text>
-					<Link href="/sign-in" className={ cn("font-semibold") }>
-						Sign In
-					</Link>
+				<View className={ cn("space-y-4") }>
+					<FormTextInput<SignUpForm>
+						name="email"
+						label="Email"
+						placeholder="your@email.com"
+						autoCapitalize="none"
+						keyboardType="email-address"
+						autoComplete="email"
+					/>
+
+					<FormTextInput<SignUpForm>
+						name="password"
+						label="Password"
+						placeholder="••••••••"
+						secureTextEntry
+						autoComplete="password-new"
+						wrapperClassName={ cn("mt-4") }
+					/>
+
+					<FormTextInput<SignUpForm>
+						name="confirmPassword"
+						label="Confirm Password"
+						placeholder="••••••••"
+						secureTextEntry
+						autoComplete="password-new"
+						wrapperClassName={ cn("mt-4") }
+					/>
+
+					<FormSubmitButton
+						className={ cn("mt-6") }
+						isLoading={ signUp.isPending }
+					>
+						Sign Up
+					</FormSubmitButton>
+
+					<View className={ cn("flex-row", "justify-center", "mt-4") }>
+						<Text>Already have an account? </Text>
+						<Link href="/sign-in" className={ cn("font-semibold") }>
+							Sign In
+						</Link>
+					</View>
 				</View>
 			</View>
-		</View>
+		</Form>
 	)
 }
 

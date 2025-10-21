@@ -5,7 +5,7 @@ import { cn } from "@/lib"
 
 import { Text } from "../Text"
 
-interface ButtonProps extends TouchableOpacityProps {
+export interface ButtonProps extends TouchableOpacityProps {
 	children: ReactNode
 	className?: string
 	textClassName?: string

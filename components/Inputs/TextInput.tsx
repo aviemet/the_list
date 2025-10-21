@@ -2,7 +2,7 @@ import { TextInput as RNTextInput, TextInputProps as RNTextInputProps } from "re
 
 import { cn } from "@/lib"
 
-interface TextInputProps extends RNTextInputProps {
+export interface TextInputProps extends RNTextInputProps {
 	className?: string
 }
 
